@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 // RecipeItem.jsx
 
 const RecipeItem = ({ item }) => { // Destructure 'item' directly from props
@@ -15,6 +16,14 @@ const RecipeItem = ({ item }) => { // Destructure 'item' directly from props
                 </a>
             */}
         </div>
+=======
+const RecipeItem = (props) =>{
+    
+    console.log(props, 'recipe-item-props');
+
+    return (
+        <div>Recipe item</div>
+>>>>>>> Stashed changes
     )
 
 }
