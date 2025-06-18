@@ -1,33 +1,36 @@
-import { useState } from 'react';
-import './styles.css'
+// src/components/search/index.jsx (or Search.jsx)
 
-const Search = (props) =>{
+import { useState } from "react";
+import './styles.css'; // Assuming you have a CSS file for the Search component
 
-    console.log(props);
-    const {getDataFromSearchComponent} = props;
+const Search = ({ getDataFromSearchComponent }) => { // Destructure the prop
+    const [inputValue, setInputValue] = useState(''); // State to hold the input value
 
-    const[inputValue, setInputValue] = useState('')
+    // Handler for when the input value changes
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value); // Update the state with the current input value
+    };
 
-    const handleInputvalue = (event)=>{
-        const {value} = event.target;
+    // Handler for when the form is submitted or search button is clicked
+    const handleSubmit = (event) => {
+        event.preventDefault(); // Prevent default form submission behavior (page reload)
+        getDataFromSearchComponent(inputValue); // Pass the input value to the parent
+    };
 
-        setInputValue(value)
-    }
-
-    console.log(inputValue);
-
-    const handleSubmit = (event) =>{
-        event.preventDefault()
-        getDataFromSearchComponent()
-    }
-
-    return(
-        <form onSubmit={handleSubmit} className="Search">
-            <input name="search" onChange={handleInputvalue} value={inputValue} placeholder="Search Recipes" id="search"/>
-            <button type="submit">Search</button>
-
+    return (
+        <form className="search-form" onSubmit={handleSubmit}>
+            <input
+                type="text"
+                placeholder="Search Recipes..."
+                value={inputValue} // Controlled component: input value is tied to state
+                onChange={handleInputChange} // Update state on input change
+                className="search-input"
+            />
+            <button type="submit" className="search-button">
+                Search
+            </button>
         </form>
-    )
-}
+    );
+};
 
 export default Search;
