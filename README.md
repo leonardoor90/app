@@ -70,4 +70,16 @@ Memoização de funções e valores para otimizar o desempenho.
 
 O aplicativo está atualmente em produção e pode ser acessado no seguinte link:
 
+<<<<<<< HEAD
 [Clique aqui para acessar o Recipe Finder App] (Insira o Link do seu Firebase Aqui)
+=======
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+//e953209d44604cfe8651ea54884ff2ab
+>>>>>>> fb01129 (Funções favoritos e recipes list, dark and white modes)
