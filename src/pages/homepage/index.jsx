@@ -1,6 +1,6 @@
 // Homepage.jsx
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import Search from "../../components/search";
 <<<<<<< HEAD
 <<<<<<< Updated upstream
@@ -17,41 +17,37 @@ const Homepage = () => {
     const [recipes, setRecipes] = useState([]);
     const [error, setError] = useState(null);
     const [favorites, setFavorites] = useState([]);
-    // New state for theme, default to 'light'
-    const [theme, setTheme] = useState('light'); // 'light' or 'dark'
+    const [theme, setTheme] = useState('light');
 
-    // Load favorites from localStorage on initial render
+    // --- Effects for localStorage (no changes needed for useCallback/useMemo here) ---
     useEffect(() => {
         const storedFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
         if (storedFavorites) {
             setFavorites(storedFavorites);
         }
 
-        // Load theme from localStorage on initial render
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             setTheme(savedTheme);
         }
-    }, []); // Runs once on mount
+    }, []);
 
-    // Save favorites to localStorage whenever the favorites state changes
     useEffect(() => {
         localStorage.setItem('favoriteRecipes', JSON.stringify(favorites));
     }, [favorites]);
 
-    // Save theme to localStorage whenever the theme state changes
     useEffect(() => {
         localStorage.setItem('theme', theme);
-        // Apply or remove dark-theme class on the body element
         if (theme === 'dark') {
             document.body.classList.add('dark-theme');
         } else {
             document.body.classList.remove('dark-theme');
         }
-    }, [theme]); // Runs whenever 'theme' state changes
+    }, [theme]);
+    // --- End Effects ---
 
-
-    const getDataFromSearchComponent = async (getData) => {
+    // --- Optimized Functions using useCallback ---
+    const getDataFromSearchComponent = useCallback(async (getData) => {
         setLoadingState(true);
 <<<<<<< HEAD
         setError(null); // Clear any previous errors
@@ -97,9 +93,9 @@ const Homepage = () => {
         } finally {
             setLoadingState(false);
         }
-    };
+    }, [setLoadingState, setError, setRecipes]);
 
-    const handleAddFavorites = (recipeItem) => {
+    const handleAddFavorites = useCallback((recipeItem) => {
         const alreadyFavorite = favorites.some(item => item.id === recipeItem.id);
 
         if (alreadyFavorite) {
@@ -108,32 +104,43 @@ const Homepage = () => {
             setFavorites(prevFavorites => [...prevFavorites, recipeItem]);
             alert('Recipe added to favorites!');
         }
-    };
+    }, [favorites, setFavorites]);
 
-    const handleRemoveFavorite = (idToRemove) => {
+    const handleRemoveFavorite = useCallback((idToRemove) => {
         setFavorites(prevFavorites => prevFavorites.filter(item => item.id !== idToRemove));
         alert('Recipe removed from favorites!');
-    };
+    }, [setFavorites]);
 
-    // --- NEW FUNCTION: toggleTheme ---
-    const toggleTheme = () => {
+    const toggleTheme = useCallback(() => {
         setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
-    };
-    // --- END NEW FUNCTION ---
-
+    }, [setTheme]);
+    // --- End Optimized Functions ---
 
     console.log('Current Recipes State in Homepage:', recipes);
     console.log('Current Favorites State:', favorites);
     console.log('Current Theme:', theme);
 
     return (
-        // Apply theme class to the main homepage div or body
-        <div className={`homepage ${theme === 'dark' ? 'dark-theme' : ''}`}> {/* Conditional class */}
-
+        <div className={`homepage ${theme === 'dark' ? 'dark-theme' : ''}`}>
             {/* Theme Toggle Button - positioned in top-right via CSS */}
             <button onClick={toggleTheme} className="theme-toggle-button">
                 {theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
             </button>
+
+            {/* --- NEW FUNCTIONALITY DESCRIPTION DIV --- */}
+            <div className="app-description">
+                <h1>Welcome to the Recipe App!</h1>
+                <p>This application allows you to explore and manage your favorite recipes with ease. Here are its key functionalities:</p>
+                <ul>
+                    <li><strong>Recipe Search:</strong> Find delicious recipes by typing keywords in the search bar.</li>
+                    <li><strong>Add to Favorites:</strong> Click the "Add to Favorites" button on any recipe to save it to your personal list.</li>
+                    <li><strong>Remove from Favorites:</strong> Easily remove recipes from your favorites list by clicking the "Remove" button.</li>
+                    <li><strong>Theme Switching:</strong> Toggle between a Daylight and Nightlight theme using the button at the top-right corner. Your preference is saved!</li>
+                    <li><strong>Data Persistence:</strong> Your favorite recipes and theme choice are automatically saved in your browser, so they're still there when you return.</li>
+                </ul>
+                <p>Start by searching for your next culinary adventure!</p>
+            </div>
+            {/* --- END NEW FUNCTIONALITY DESCRIPTION DIV --- */}
 
             <Search getDataFromSearchComponent={getDataFromSearchComponent} />
 
@@ -201,7 +208,6 @@ const Homepage = () => {
 >>>>>>> Stashed changes
 =======
 
-            {/* Display Favorites List */}
             <div className="favorites-section">
                 <h2>Your Favorites ({favorites.length})</h2>
                 {favorites.length > 0 ? (
