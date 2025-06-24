@@ -138,6 +138,7 @@ const Homepage = () => {
                     <li><strong>Theme Switching:</strong> Toggle between a Daylight and Nightlight theme using the button at the top-right corner. Your preference is saved!</li>
                     <li><strong>Data Persistence:</strong> Your favorite recipes and theme choice are automatically saved in your browser, so they're still there when you return.</li>
                 </ul>
+                <p>This application is built using <strong>React</strong> for the user interface, leverages the <strong>Spoonacular API</strong> for recipe data, and is deployed using <strong>Firebase</strong> for reliable hosting.</p> {/* NEW PARAGRAPH */}
                 <p>Start by searching for your next culinary adventure!</p>
             </div>
             {/* --- END NEW FUNCTIONALITY DESCRIPTION DIV --- */}
