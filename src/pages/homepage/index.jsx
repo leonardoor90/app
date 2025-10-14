@@ -132,7 +132,7 @@ const Homepage = () => {
                 <h1>Welcome to the Recipe App!</h1>
                 <p>This application allows you to explore and manage your favorite recipes with ease. Here are its key functionalities:</p>
                 <ul>
-                    <li><strong>Recipe Search:</strong> Find delicious recipes by typing keywords in the search bar.</li>
+                    <li><strong>Recipe Search:</strong> Find delicious recipes by typing keywords like "Pasta", "Chicken" or "Apple" in the search bar.</li>
                     <li><strong>Add to Favorites:</strong> Click the "Add to Favorites" button on any recipe to save it to your personal list.</li>
                     <li><strong>Remove from Favorites:</strong> Easily remove recipes from your favorites list by clicking the "Remove" button.</li>
                     <li><strong>Theme Switching:</strong> Toggle between a Daylight and Nightlight theme using the button at the top-right corner. Your preference is saved!</li>
